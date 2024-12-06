@@ -27,6 +27,7 @@ This project is built with:
 - [React](https://reactjs.org/)
 - [shadcn-ui](https://shadcn.dev/)
 - [Tailwind CSS](https://tailwindcss.com/)
+- [jotai](https://jotai.org/)
 
 ## Template layout and structure
 
