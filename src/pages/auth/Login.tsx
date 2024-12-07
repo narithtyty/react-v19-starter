@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router';
 import { useAtom } from 'jotai';
 import { authAtom } from '@/store/auth';
 import { Button } from '@/components/ui/button';

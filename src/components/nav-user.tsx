@@ -8,7 +8,7 @@ import {
   LogOut,
   Sparkles,
 } from "lucide-react"
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 import { useAtom } from 'jotai'
 import { authAtom, logout } from '@/store/auth'
 

@@ -1,5 +1,5 @@
 import { ReactNode, useEffect } from 'react';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router';
 import { useAtom } from 'jotai';
 import { authAtom, tokenAtom, setToken } from '@/store/auth';
 import { LoadingOverlay } from '@/components/ui/loading-overlay';

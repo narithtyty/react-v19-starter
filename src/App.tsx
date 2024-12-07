@@ -1,6 +1,5 @@
-import { createBrowserRouter, RouterProvider, createRoutesFromElements, Route } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, createRoutesFromElements, Route,Outlet } from "react-router";
 import Layout from "./components/Layout";
-import { Outlet } from "react-router-dom";
 import Home from "./pages/playground/Home";
 import About from "./pages/playground/About";
 import Contact from "./pages/playground/Contact";

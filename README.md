@@ -12,10 +12,13 @@ nvm install 22
 nvm use 22
 
 # Step 4: Install the necessary dependencies.
-npm i --legacy-peer-deps
-
+npm i --legacy-peer-deps 
+or
+yarn install
 # Step 5: Start the development server with auto-reloading and an instant preview.
 npm run dev
+or 
+yarn dev
 ```
 
 ## What technologies are used for this project?

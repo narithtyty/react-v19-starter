@@ -1,7 +1,7 @@
 "use client";
 
 import { ChevronRight, type LucideIcon } from "lucide-react";
-import { useLocation } from "react-router-dom";
+import { useLocation , Link } from "react-router";
 
 import {
   Collapsible,
@@ -19,7 +19,6 @@ import {
   SidebarMenuSubItem,
   useSidebar
 } from "@/components/ui/sidebar";
-import { Link } from "react-router-dom";
 
 export function NavMain({
   className,
