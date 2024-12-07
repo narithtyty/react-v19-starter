@@ -74,7 +74,7 @@ export default function Explorer() {
                   type="file" 
                   onChange={handleFileSelect}
                   accept=".txt,.pdf,.doc,.docx"
-                  className="file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold hover:file:bg-accent"
+                  className="mr-4 py-2 px-4 rounded-full border-0 text-sm font-semibold hover:bg-accent"
                 />
               </div>
               {selectedFile && (

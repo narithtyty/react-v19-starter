@@ -12,7 +12,7 @@ const Code = React.forwardRef<HTMLPreElement, CodeProps>(
       <pre
         ref={ref}
         className={cn(
-          "mb-4 mt-2 overflow-x-auto rounded-lg border bg-muted px-4 py-3 font-mono text-sm",
+          "m-2 overflow-x-auto rounded-lg border bg-muted px-4 py-3 font-mono text-sm",
           className
         )}
         {...props}

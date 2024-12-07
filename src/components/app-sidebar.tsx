@@ -149,7 +149,7 @@ import {
 //     },
 //   ],
 // }
-const data = {
+export const data = {
   user: {
     name: "shadcn",
     email: "m@example.com",
