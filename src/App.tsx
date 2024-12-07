@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, createRoutesFromElements, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import { Outlet } from "react-router-dom";
 import Home from "./pages/playground/Home";
@@ -17,30 +17,47 @@ import Team from "./pages/settings/Team";
 import Billing from "./pages/settings/Billing";
 import Limits from "./pages/settings/Limits";
 import { ThemeInit } from "./components/theme-init";
+import Login from "./pages/auth/Login";
+import ProtectedRoute from "./components/ProtectedRoute";
+import { AuthProvider } from "./contexts/AuthProvider";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Layout><Outlet /></Layout>,
-    children: [
-      { index: true, element: <Home /> },
-      { path: "playground/about", element: <About /> },
-      { path: "playground/contact", element: <Contact /> },
-      { path: "models/genesis", element: <Genesis /> },
-      { path: "models/explorer", element: <Explorer /> },
-      { path: "models/quantum", element: <Quantum /> },
-      { path: "docs/introduction", element: <Introduction /> },
-      { path: "docs/get-started", element: <GetStarted /> },
-      { path: "docs/tutorials", element: <Tutorials /> },
-      { path: "docs/changelog", element: <Changelog /> },
-      { path: "settings/general", element: <General /> },
-      { path: "settings/team", element: <Team /> },
-      { path: "settings/billing", element: <Billing /> },
-      { path: "settings/limits", element: <Limits /> },
-      { path: "*", element: <NotFound /> },
-    ],
-  },
-]);
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <>
+      <Route path="/auth">
+        <Route path="login" element={<Login />} />
+      </Route>
+      <Route
+        path="/"
+        element={
+          <AuthProvider>
+            <ProtectedRoute>
+              <Layout>
+                <Outlet />
+              </Layout>
+            </ProtectedRoute>
+          </AuthProvider>
+        }
+      >
+        <Route index element={<Home />} />
+        <Route path="playground/about" element={<About />} />
+        <Route path="playground/contact" element={<Contact />} />
+        <Route path="models/genesis" element={<Genesis />} />
+        <Route path="models/explorer" element={<Explorer />} />
+        <Route path="models/quantum" element={<Quantum />} />
+        <Route path="docs/introduction" element={<Introduction />} />
+        <Route path="docs/get-started" element={<GetStarted />} />
+        <Route path="docs/tutorials" element={<Tutorials />} />
+        <Route path="docs/changelog" element={<Changelog />} />
+        <Route path="settings/general" element={<General />} />
+        <Route path="settings/team" element={<Team />} />
+        <Route path="settings/billing" element={<Billing />} />
+        <Route path="settings/limits" element={<Limits />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </>
+  )
+);
 
 const App = () => {
   return (

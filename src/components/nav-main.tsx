@@ -1,6 +1,7 @@
 "use client";
 
 import { ChevronRight, type LucideIcon } from "lucide-react";
+import { useLocation } from "react-router-dom";
 
 import {
   Collapsible,
@@ -21,8 +22,10 @@ import {
 import { Link } from "react-router-dom";
 
 export function NavMain({
+  className,
   items,
 }: {
+  className?: string;
   items: {
     title: string;
     url: string;
@@ -37,11 +40,13 @@ export function NavMain({
   const {
     setOpenMobile,
   } = useSidebar()
+  const location = useLocation();
+
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Platform</SidebarGroupLabel>
       <SidebarMenu>
-        {items.map((item) => (
+        {items.map((item, index) => (
           <Collapsible
             key={item.title}
             asChild
@@ -60,7 +65,10 @@ export function NavMain({
                 <SidebarMenuSub>
                   {item.items?.map((subItem) => (
                     <SidebarMenuSubItem key={subItem.title}>
-                      <SidebarMenuSubButton asChild>
+                      <SidebarMenuSubButton 
+                        asChild
+                        className={location.pathname === subItem.url ? "bg-accent" : ""}
+                      >
                         <Link to={subItem.url} onClick={() => setOpenMobile(false)}>
                           <span>{subItem.title}</span>
                         </Link>

@@ -8,6 +8,9 @@ import {
   LogOut,
   Sparkles,
 } from "lucide-react"
+import { useNavigate } from 'react-router-dom'
+import { useAtom } from 'jotai'
+import { authAtom, logout } from '@/store/auth'
 
 import {
   Avatar,
@@ -40,6 +43,8 @@ export function NavUser({
   }
 }) {
   const { isMobile } = useSidebar()
+  const navigate = useNavigate()
+  const [, setAuth] = useAtom(authAtom)
 
   return (
     <SidebarMenu>
@@ -102,8 +107,11 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <LogOut />
+            <DropdownMenuItem onClick={() => {
+              logout(setAuth);
+              navigate('/auth/login');
+            }}>
+              <LogOut className="mr-2 h-4 w-4" />
               Log out
             </DropdownMenuItem>
           </DropdownMenuContent>
