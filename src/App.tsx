@@ -19,7 +19,6 @@ import Limits from "./pages/settings/Limits";
 import { ThemeInit } from "./components/theme-init";
 import Login from "./pages/auth/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
-import { AuthProvider } from "./contexts/AuthProvider";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,13 +29,11 @@ const router = createBrowserRouter(
       <Route
         path="/"
         element={
-          <AuthProvider>
             <ProtectedRoute>
               <Layout>
                 <Outlet />
               </Layout>
             </ProtectedRoute>
-          </AuthProvider>
         }
       >
         <Route index element={<Home />} />

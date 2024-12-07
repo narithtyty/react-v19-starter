@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { setToken } from '@/store/auth';
+import { Loader2 } from 'lucide-react';
 
 interface LocationState {
   from?: {
@@ -20,32 +21,31 @@ export default function Login() {
   const location = useLocation();
   const [email, setEmail] = useState('test@gmail.com');
   const [password, setPassword] = useState('password');
+  const [isLoading, setIsLoading] = useState(false);
 
   const from = (location.state as LocationState)?.from?.pathname || '/';
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     
     try {
-      // TODO: Implement your actual login logic here
-      // const response = await loginUser(email, password);
-      // For demo purposes, we'll simulate a successful login
+      // Simulate API delay with Promise
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
       const mockToken = 'mock_jwt_token';
       setToken(mockToken);
       
       setAuth({
-        user: {
-          id: '1',
-          email: email,
-          name: 'John Doe',
-        },
         isAuthenticated: true,
         isLoading: false,
       });
       
-      navigate('/', { replace: true });
+      navigate(from, { replace: true });
     } catch (error) {
       console.error('Login failed:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -67,6 +67,7 @@ export default function Login() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                disabled={isLoading}
               />
             </div>
             <div className="space-y-2">
@@ -77,12 +78,18 @@ export default function Login() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                disabled={isLoading}
               />
             </div>
           </CardContent>
           <CardFooter>
-            <Button type="submit" className="w-full">
-              Sign In
+            <Button type="submit" className="w-full" disabled={isLoading}>
+              {isLoading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Signing in...
+                </>
+              ) : 'Sign In'}
             </Button>
           </CardFooter>
         </form>

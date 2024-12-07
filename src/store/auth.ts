@@ -1,19 +1,11 @@
 import { atom } from 'jotai';
 
-interface User {
-  id: string;
-  email: string;
-  name: string;
-}
-
 interface AuthState {
-  user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
 }
 
 export const authAtom = atom<AuthState>({
-  user: null,
   isAuthenticated: false,
   isLoading: true,
 });
@@ -34,7 +26,6 @@ export const setToken = (token: string | null) => {
 export const logout = (setAuth: (value: AuthState) => void) => {
   setToken(null);
   setAuth({
-    user: null,
     isAuthenticated: false,
     isLoading: false,
   });
