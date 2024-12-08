@@ -22,7 +22,7 @@ export default function Login() {
   const [, setAuth] = useAtom(authAtom);
   const navigate = useNavigate();
   const location = useLocation();
-  const [email, setEmail] = useState('test@gmail.com');
+  const [email, setEmail] = useState('test@example.com');
   const [password, setPassword] = useState('password');
   const [isLoading, setIsLoading] = useState(false);
 
