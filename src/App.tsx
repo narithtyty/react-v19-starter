@@ -18,7 +18,7 @@ import Limits from "./pages/settings/Limits";
 import { ThemeInit } from "./components/theme-init";
 import Login from "./pages/auth/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
-
+import { Toaster } from "@/components/ui/toaster"
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -60,6 +60,7 @@ const App = () => {
     <>
       <ThemeInit />
       <RouterProvider router={router} />
+      <Toaster />
     </>
   );
 };
