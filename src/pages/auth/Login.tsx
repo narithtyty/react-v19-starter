@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router';
 import { useAtom } from 'jotai';
 import { authAtom } from '@/store/auth';
@@ -9,7 +8,8 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 import { Label } from '@/components/ui/label';
 import { setToken } from '@/store/auth';
 import { Loader2, Eye, EyeOff } from 'lucide-react';
-import { useToast } from "@/components/ui/use-toast"
+import { useToast } from "@/components/ui/use-toast";
+import { api } from '@/services/apiService';
 
 interface LocationState {
   from?: {
@@ -18,7 +18,7 @@ interface LocationState {
 }
 
 export default function Login() {
-  const { toast } = useToast()
+  const { toast } = useToast();
   const [, setAuth] = useAtom(authAtom);
   const navigate = useNavigate();
   const location = useLocation();
@@ -34,17 +34,12 @@ export default function Login() {
     setIsLoading(true);
     
     try {
-      const response = await axios.post('https://nestjs-fastify-api-01.vercel.app/api/v1/auth/login', {
+      const response = await api.post('/auth/login', {
         email,
         password,
-      }, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        withCredentials: true
       });
 
-      const { access_token } = response.data;
+      const { access_token } = response;
       setToken(access_token);
       
       setAuth({
