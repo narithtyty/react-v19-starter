@@ -103,6 +103,31 @@ class ApiService {
             throw error;
         }
     }
+
+    async downloadFile(endpoint: string, fileName: string, customHeaders?: HeadersInit): Promise<void> {
+        const headers = { ...this.defaultHeaders, ...customHeaders };
+        try {
+            const response = await fetch(`${this.baseUrl}${endpoint}`, {
+                method: 'GET',
+                headers: headers
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const blob = await response.blob();
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = fileName;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        } catch (error) {
+            console.error('Error downloading file:', error);
+            throw error;
+        }
+    }
 }
 
 export const api = new ApiService('https://nestjs-fastify-api-01.vercel.app/api/v1', {
