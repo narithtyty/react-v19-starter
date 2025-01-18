@@ -34,19 +34,19 @@ export default function Login() {
     setIsLoading(true);
     
     try {
-      const response = await api.post('/auth/login', {
-        email,
-        password,
-      });
+      // const response = await api.post('/auth/login', {
+      //   email,
+      //   password,
+      // });
 
-      const { access_token } = response;
-      setToken(access_token);
-      
+      // const { access_token } = response;
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      setToken('abc');
+
       setAuth({
         isAuthenticated: true,
         isLoading: false,
       });
-      
       navigate(from, { replace: true });
     } catch (error: any) {
       toast({
@@ -109,18 +109,18 @@ export default function Login() {
               </div>
             </div>
           </CardContent>
-          <CardFooter>
-            <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Signing in...
-                </>
-              ) : 'Sign In'}
-            </Button>
-          </CardFooter>
-        </form>
-      </Card>
-    </div>
+        <CardFooter>
+          <Button type="submit" className="w-full" disabled={isLoading}>
+            {isLoading ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Signing in...
+              </>
+            ) : 'Sign In'}
+          </Button>
+        </CardFooter>
+      </form>
+    </Card>
+  </div>
   );
 }
